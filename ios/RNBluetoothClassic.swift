@@ -611,7 +611,14 @@ extension RNBluetoothClassic : BluetoothDataReceivedDelegate {
             return receivedData;
         }
         
+        let message = receivedData.base64EncodedString();
+        let bluetoothMessage:BluetoothMessage = BluetoothMessage<String>(fromDevice: fromDevice, data: message);
+        sendEvent(withName: BTEvent.READ.rawValue, body: bluetoothMessage.asDictionary());
+        
+        return Data();
+
         // There are Read Listeners, we can send the request.
+        /*
         if let data = String(data: receivedData, encoding: encoding) {
             let indexes = data.indexes(of: delimiter)
             var startIndex = data.startIndex
@@ -638,5 +645,6 @@ extension RNBluetoothClassic : BluetoothDataReceivedDelegate {
         }
         
         return receivedData
+        */
     }
 }
