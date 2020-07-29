@@ -825,19 +825,20 @@ public class RNBluetoothClassicModule
     String msg = String.format("Received %d bytes from device %s", data.length, device.getName());
     Log.d(TAG, msg);
 
-    mBuffer.append(new String(data, mCharset));
+    //mBuffer.append(new String(data, mCharset));
 
     if (!mReadObserving.get()) {
       Log.d(TAG, "No BTEvent.READ listeners are registered, skipping handling of the event");
       return;
     }
 
-    String message;
-    while ((message = readUntil(this.mDelimiter)) != null) {
-      BluetoothMessage bluetoothMessage
-              = new BluetoothMessage<>(new NativeDevice(mBluetoothService.connectedDevice()).map(), message);
-      sendEvent(BluetoothEvent.READ.code, bluetoothMessage.asMap());
-    }
+    String message = Base64.encodeToString(data, Base64.DEFAULT);
+    msg = String.format("Base64 format = %s", message);
+    Log.d(TAG, msg);
+    //while ((message = readUntil(this.mDelimiter)) != null) {
+    BluetoothMessage bluetoothMessage = new BluetoothMessage<>(new NativeDevice(mBluetoothService.connectedDevice()).map(), message);
+    sendEvent(BluetoothEvent.READ.code, bluetoothMessage.asMap());
+    //}
   }
 
   /**
