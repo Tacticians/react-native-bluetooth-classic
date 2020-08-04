@@ -75,7 +75,8 @@ class BluetoothDevice: NSObject, StreamDelegate {
      */
     func asDictionary() -> NSDictionary {
         let dict: NSDictionary = NSMutableDictionary()
-        dict.setValue(accessory.name, forKey: "name")
+        //dict.setValue(accessory.name, forKey: "name")
+        dict.setValue(accessory.serialNumber, forKey: "name")
         dict.setValue(accessory.serialNumber, forKey: "address")
         dict.setValue(accessory.serialNumber, forKey: "id")
         
