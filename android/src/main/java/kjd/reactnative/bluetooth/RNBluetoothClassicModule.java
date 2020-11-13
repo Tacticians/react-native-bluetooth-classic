@@ -772,7 +772,7 @@ public class RNBluetoothClassicModule
   }
 
   @Override
-  public void onConnectionFailed(BluetoothDevice device, Throwable reason) {
+  synchronized public void onConnectionFailed(BluetoothDevice device, Throwable reason) {
     String msg = String.format("Connection to device %s has failed", device.getName());
     Log.d(this.getClass().getSimpleName(),  msg, reason);
 
