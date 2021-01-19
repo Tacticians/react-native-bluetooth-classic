@@ -49,8 +49,8 @@ class RNBluetoothClassic : RCTEventEmitter {
         self.eaManager = EAAccessoryManager.shared()
         self.cbCentral = CBCentralManager()
         self.notificationCenter = NotificationCenter.default
-        self.supportedProtocols = Bundle.main
-            .object(forInfoDictionaryKey: "UISupportedExternalAccessoryProtocols") as! [String]
+        self.supportedProtocols = [""];
+        //Bundle.main.object(forInfoDictionaryKey: "UISupportedExternalAccessoryProtocols") as! [String]
         
         self.delimiter = "\n"
         self.encoding = .utf8
